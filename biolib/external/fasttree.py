@@ -35,7 +35,7 @@ from biolib.bootstrap import bootstrap_alignment, bootstrap_support
 from biolib.external.execute import check_on_path
 
 
-class FastTree():
+class FastTree:
     """Wrapper for running FastTree."""
 
     def __init__(self, multithreaded=True):
@@ -84,11 +84,12 @@ class FastTree():
 
         # calculate replicates
         parallel = Parallel(cpus)
-        parallel.run(self._bootstrap, None, xrange(num_replicates), None)
+        replicate_numbers = list(range(num_replicates))
+        parallel.run(self._bootstrap, None, replicate_numbers, None)
 
         # calculate support values
         rep_tree_files = []
-        for rep_index in xrange(num_replicates):
+        for rep_index in replicate_numbers:
             rep_tree_files.append(os.path.join(self.output_dir, 'rep_%d' % rep_index, 'bootstrap.tree'))
 
         tree_name = os.path.splitext(os.path.basename(input_tree))[0]

@@ -80,11 +80,12 @@ class RAxML():
 
         # calculate replicates
         parallel = Parallel(cpus)
-        parallel.run(self._bootstrap, None, xrange(num_replicates), None)
+        replicate_numbers = list(range(num_replicates))
+        parallel.run(self._bootstrap, None, replicate_numbers, None)
 
         # calculate support values
         rep_tree_files = []
-        for rep_index in xrange(num_replicates):
+        for rep_index in replicate_numbers:
             rep_tree_files.append(os.path.join(output_dir, 'rep_%d' % rep_index, 'RAxML_bestTree.support'))
 
         tree_name = os.path.splitext(os.path.basename(input_tree))[0]
