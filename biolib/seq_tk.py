@@ -345,7 +345,7 @@ def trim_seqs(seqs, min_per_taxa, consensus, min_per_bp):
         # trim columns
         output_seqs = {}
         pruned_seqs = {}
-        for seq_id, seq in seqs.iteritems():
+        for seq_id, seq in seqs.items():
             masked_seq = ''.join([seq[i] for i in range(0, len(mask)) if mask[i]])
 
             valid_bases = len(masked_seq) - masked_seq.count('.') - masked_seq.count('-')
