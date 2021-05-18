@@ -176,7 +176,7 @@ def concatenate_files(input_files, output_file, common_header=False):
                         
                 # force newline between files
                 if line[-1] != '\n':
-                    outfile.write('\n')
+                    outfile.write(b'\n')
 
                         
 def alphanumeric_sort(l):
