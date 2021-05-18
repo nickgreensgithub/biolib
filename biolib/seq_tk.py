@@ -272,7 +272,7 @@ def fragment(seq, window_size, step_size):
 
     fragments = []
     start = 0
-    for i in xrange(0, len(seq), step_size):
+    for i in range(0, len(seq), step_size):
         end = i + window_size
         if end < len(seq):
             fragments.append(seq[start:end])
@@ -311,11 +311,12 @@ def trim_seqs(seqs, min_per_taxa, consensus, min_per_bp):
             Number of columns filtered by consensus
         """
 
-        alignment_length = len(seqs.values()[0])
+        first_item = list(seqs.items())[0][1]
+        alignment_length = len(first_item)
 
         # count number of taxa represented in each column
         column_count = [0] * alignment_length
-        column_chars = [list() for _ in xrange(alignment_length)]
+        column_chars = [list() for _ in range(alignment_length)]
         for seq in seqs.values():
             for i, ch in enumerate(seq):
                 if ch != '.' and ch != '-':
@@ -345,7 +346,7 @@ def trim_seqs(seqs, min_per_taxa, consensus, min_per_bp):
         output_seqs = {}
         pruned_seqs = {}
         for seq_id, seq in seqs.iteritems():
-            masked_seq = ''.join([seq[i] for i in xrange(0, len(mask)) if mask[i]])
+            masked_seq = ''.join([seq[i] for i in range(0, len(mask)) if mask[i]])
 
             valid_bases = len(masked_seq) - masked_seq.count('.') - masked_seq.count('-')
             if valid_bases < len(masked_seq) * min_per_bp:
